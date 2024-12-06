@@ -1,0 +1,25 @@
+<div class="home-container">
+  <!-- Lazy loaded logo -->
+  <img src="assets/logo.png" alt="Logo" class="title" loading="lazy">
+  
+  <!-- Login button -->
+  <button (click)="onLoginClick()" type="button" class="centered-button">Login</button>
+  
+  <!-- Sign Up button -->
+  <button (click)="onSignupClick()"  type="button" class="signup">Sign Up</button>
+
+  <!-- Instructions container with hover effect -->
+  <div class="hover-container">
+    <!-- Lazy loaded info image -->
+    <img src="assets/info.png" alt="help" class="info-image" loading="lazy">
+    
+    <div class="hover-content">
+      <p>To play, flip two cards to find a match. Matched cards stay up, non-matched ones flip back after 2 seconds. Complete all levels to win!</p>
+    </div>
+  </div>
+
+  <!-- Profile button with lazy-loaded image -->
+  <button (click)=" onProfileClick()" class="profile-button">
+    <img src="assets/user.png" alt="Profile Button" class="profile" loading="lazy">
+  </button>
+</div>

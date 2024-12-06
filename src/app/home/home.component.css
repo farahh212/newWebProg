@@ -1,0 +1,163 @@
+/* Base styles for mobile-first approach */
+:host {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(89, 9, 109);
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.title {
+  max-width: 100%; /* Make the title responsive */
+  height: auto; /* Maintain aspect ratio */
+  margin-bottom: 30px;
+}
+
+.centered-button,
+.signup {
+  background-color: purple;
+  color: white;
+  font-size: 1.5rem;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  width: 220px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  text-align: center;
+  margin-left: 350px;
+}
+
+.profile-button {
+  background-color: rgb(89, 9, 109);
+  border: none;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 70px; /* Larger size for profile button */
+  height: 70px; /* Larger size for profile button */
+}
+
+.profile {
+  width: 100%; /* Make the profile image fill the button */
+  height: 100%; /* Make the profile image fill the button */
+  border-radius: 50%;
+  object-fit: cover; /* Maintain image aspect ratio */
+}
+
+/* Hover container */
+.hover-container {
+  position: relative;
+  color: white;
+  width: 70px;
+  height: 70px;
+  background-color: rgb(89, 9, 109);
+  border-radius: 50%;
+  text-align: center;
+  transition: transform 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.info-image {
+  width: 80%;
+  height: 80%;
+  border-radius: 50%;
+}
+
+.hover-content {
+  display: none;
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-10px);
+  background-color: darkviolet;
+  padding: 15px;
+  border-radius: 5px;
+  color: white;
+  font-size: 1rem;
+  width: 200px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.hover-container:hover .hover-content {
+  display: block;
+  transform: translateX(-50%) translateY(-10px) scale(0.8);
+}
+
+/* Responsive Layout */
+@media (max-width: 768px) {
+  .title {
+    width: 90%; /* Title gets smaller on tablets */
+    margin-bottom: 20px;
+  }
+
+  .centered-button,
+  .signup {
+    width: 180px; /* Smaller button width */
+    font-size: 1.2rem; /* Adjust font size */
+    margin-left: 20px;
+  }
+
+  .profile-button {
+    width: 60px; /* Adjust profile button size on smaller screens */
+    height: 60px; /* Adjust profile button size on smaller screens */
+  }
+
+  .hover-container {
+    width: 60px;
+    height: 60px;
+  }
+
+  .info-image {
+    width: 70%;
+    height: 70%;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    width: 100%; /* Full width on small devices */
+    margin-bottom: 15px;
+  }
+
+  .centered-button,
+  .signup {
+    width: 150px; /* Even smaller buttons */
+    font-size: 1rem; /* Adjust font size */
+    margin-bottom: 10px;
+  }
+
+  .profile-button {
+    width: 50px; /* Smaller size on very small screens */
+    height: 50px; /* Smaller size on very small screens */
+  }
+
+  .hover-container {
+    width: 50px;
+    height: 50px;
+  }
+
+  .info-image {
+    width: 60%;
+    height: 60%;
+  }
+
+  h1 {
+    font-size: 2rem; /* Smaller title on small screens */
+  }
+}

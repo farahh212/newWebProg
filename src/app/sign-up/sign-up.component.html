@@ -1,0 +1,32 @@
+<div class="signup-container">
+  <form class="signup-form" #signUpForm="ngForm" (ngSubmit)="onSubmit()" autocomplete="off">
+    <h2>Sign Up</h2>
+
+    <div class="form-group">
+      <input type="text" placeholder="Full Name" [(ngModel)]="name" name="name" required>
+      <p *ngIf="signUpForm.submitted && !name" class="error-message">Full Name is required.</p>
+    </div>
+
+    <div class="form-group">
+      <input type="email" placeholder="Email Address" [(ngModel)]="email" name="email" required>
+      <p *ngIf="signUpForm.submitted && !email" class="error-message">Email Address is required.</p>
+      <p *ngIf="signUpForm.submitted && email && !isValidEmail(email)" class="error-message">Please enter a valid email address.</p>
+    </div>
+
+    <div class="form-group">
+      <input type="password" placeholder="Password" [(ngModel)]="password" name="password" required minlength="8">
+      <p *ngIf="signUpForm.submitted && !password" class="error-message">Password is required.</p>
+      <p *ngIf="signUpForm.submitted && password && password.length < 8" class="error-message">Password must be at least 8 characters long.</p>
+    </div>
+
+    <div class="form-group">
+      <input type="password" placeholder="Confirm Password" [(ngModel)]="confirmPassword" name="confirmPassword" required>
+      <p *ngIf="signUpForm.submitted && !confirmPassword" class="error-message">Confirm Password is required.</p>
+      <p *ngIf="signUpForm.submitted && confirmPassword && password !== confirmPassword" class="error-message">Passwords do not match.</p>
+    </div>
+
+    <button type="submit">Sign Up</button>
+    
+    <p>Already have an account? <a routerLink="/login">Log in</a></p>
+  </form>
+</div>

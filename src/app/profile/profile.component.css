@@ -1,0 +1,113 @@
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #6e8efb, #a777e3); /* Match the purple gradient */
+    height: 100vh;
+    color: #fff; /* Ensure text color is readable on purple background */
+  }
+  
+  nav {
+    width: 100%;
+    display: flex;
+    justify-content: center; /* Centering the navigation */
+    margin-bottom: 20px;
+  }
+  
+  nav a {
+    text-decoration: none;
+    color: #ffeb3b; /* Contrast color for better visibility */
+    font-size: 18px;
+  }
+  
+  nav a:hover {
+    text-decoration: underline;
+  }
+  
+  .profile-card {
+    background: rgba(255, 255, 255, 0.1); /* Semi-transparent card background */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px); /* Blurred backdrop for a frosted glass effect */
+    text-align: center;
+    width: 300px;
+  }
+  
+  .profile-pic {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px; /* Adjusted margin for better layout */
+  }
+  
+  .profile-card button {
+    margin-bottom: 10px; /* Space between buttons */
+  }
+  
+  h2 {
+    margin-bottom: 10px;
+    font-size: 24px;
+    color: #ff69b4; /* Pink color for the name */
+  }
+  
+  button {
+    padding: 10px 15px;
+    background-color: #ff69b4; /* Pink buttons */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #ff1493; /* Darker pink for hover state */
+  }
+  
+  p {
+    margin: 10px 0;
+    font-size: 16px;
+  }
+  
+  .modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+  
+  .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 10px;
+  }
+  
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
