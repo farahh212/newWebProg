@@ -1,0 +1,48 @@
+<div class="profile-container">
+  <nav>
+    <p>Would you like to log out?: 
+      <button (click)="logout()" class="logout-btn">Log Out</button>
+    </p>
+  </nav>
+
+  <div class="profile-card">
+    <div class="profile-header">
+      <img [src]="profilePicture" alt="Profile Picture" class="profile-pic">
+      <h2>{{ name }}</h2>
+    </div>
+
+    <div class="profile-info">
+      <p><strong>Name:</strong> {{ name }}</p>
+      <p><strong>Email:</strong> {{ email }}</p>
+      <p><strong>Top Score:</strong> {{ opScore }}</p> <!-- Display top score -->
+    </div>
+
+    <div class="profile-actions">
+      <button type="button" class="change-email-btn" (click)="openChangeEmailModal()">Change Email</button>
+      <button type="button" class="change-password-btn" (click)="openChangePasswordModal()">Change Password</button>
+      <!-- Button to go to game page -->
+      <button type="button" class="go-to-game-btn" (click)="goToGamePage()">Go to Game Page</button>
+    </div>
+  </div>
+
+  <!-- Change Email Modal -->
+  <div *ngIf="isChangeEmailModalOpen" class="modal">
+    <div class="modal-content">
+      <span class="close" (click)="closeChangeEmailModal()">&times;</span>
+      <h2>Change Email</h2>
+      <input type="email" [(ngModel)]="newEmail" placeholder="New Email">
+      <button type="button" (click)="changeEmail()">Save</button>
+    </div>
+  </div>
+
+  <!-- Change Password Modal -->
+  <div *ngIf="isChangePasswordModalOpen" class="modal">
+    <div class="modal-content">
+      <span class="close" (click)="closeChangePasswordModal()">&times;</span>
+      <h2>Change Password</h2>
+      <input type="password" [(ngModel)]="newPassword" placeholder="New Password">
+      <input type="password" [(ngModel)]="confirmNewPassword" placeholder="Confirm New Password">
+      <button type="button" (click)="changePassword()">Save</button>
+    </div>
+  </div>
+</div>

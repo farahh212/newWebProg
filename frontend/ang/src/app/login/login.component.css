@@ -1,0 +1,84 @@
+/* login.component.css */
+:host {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(89, 9, 109);
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* Heading Style */
+h1 {
+  color: white;
+  font-size: 4vw; /* Scalable with viewport width */
+  text-align: center;
+  margin: 0 0 20px 0;
+}
+
+/* Form Fields */
+form {
+  width: 80%;
+  max-width: 400px;
+  margin-bottom: 15px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: none;
+  box-sizing: border-box;
+}
+
+/* Centered Button */
+.centered-button {
+  background-color: purple;
+  color: white;
+  font-size: 1.2rem;
+  padding: 12px 0;
+  width: 80%;
+  max-width: 400px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+}
+
+/* Hover Effect */
+.centered-button:hover {
+  background-color: darkviolet;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 3rem;
+  }
+
+  input {
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+
+  .centered-button {
+    font-size: 1rem;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  .centered-button {
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+}
