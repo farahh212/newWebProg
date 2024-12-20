@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    // Clone the request and attach the credentials (cookies)
     const clonedRequest = req.clone({
       withCredentials: true, // Include cookies
     });

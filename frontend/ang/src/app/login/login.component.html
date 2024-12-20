@@ -2,10 +2,10 @@
   <form class="login-form" (ngSubmit)="onLoginClick()">
     <h2>Login</h2>
     <div class="form-group">
-      <input type="email" placeholder="Email" [(ngModel)]="email" name="email" required>
+      <input type="username" placeholder="Username" [(ngModel)]="username" name="username" required>
     </div>
     <div class="form-group">
-      <input type="password" placeholder="Password" [(ngModel)]="pass" name="pass" required>
+      <input type="password" placeholder="Password" [(ngModel)]="password" name="password" required>
     </div>
     <button type="submit">Login</button>
     <p>Don't have an account? <a routerLink="/sign-up">Sign up</a></p>

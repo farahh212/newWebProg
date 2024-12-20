@@ -16,25 +16,25 @@ class AuthController extends Controller
             'username' => 'required|string',
             'password' => 'required|string',
         ]);
-
+    
         // Find the user by username
         $user = Userr::where('username', $request->username)->first();
-
-        // Check if the user exists and the password is correct
-        if ($user && Hash::check($request->password, $user->password)) {
-            
+    
+        // Check if the user exists and the password matches
+        if ($user && $user->password === $request->password) {  // Compare plain-text password
             // Create a new token for the user using Sanctum
             $token = $user->createToken('MyApp')->plainTextToken;
-
+    
             // Set a cookie with the username
             $cookie = Cookie::make('username', $user->username, 60); // cookie valid for 60 minutes
-
+    
             return response()->json([
                 'message' => 'Login successful',
                 'token' => $token
             ])->cookie($cookie);  // Attach the cookie with the response
         }
-
+    
         return response()->json(['error' => 'Unauthorized'], 401);
     }
+
 }

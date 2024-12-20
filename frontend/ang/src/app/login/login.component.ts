@@ -4,20 +4,19 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpClient } from '@angular/common/http';  // Import HttpClient
-//import { environment } from 'src/environments/environment';  // Import environment configuration for API URL
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule, RouterModule],
+  imports: [FormsModule, RouterModule, HttpClientModule],  // Import HttpClientModule here
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
-
+  styleUrls: ['./login.component.css'],
+  standalone: true,
 })
 export class LoginComponent {
   username: string = '';
-  pass: string = '';
-  apiUrl: string = 'http://127.0.0.1:8000/api/login'; // Replace with your actual backend URL
-
+  password: string = '';
+  apiUrl: string = 'http://127.0.0.1:8000/api/login'; // Backend URL
 
   constructor(
     private router: Router,
@@ -26,32 +25,25 @@ export class LoginComponent {
   ) {}
 
   onLoginClick() {
-    if (this.username && this.pass) {
+    if (this.username && this.password) {
       // Prepare login data to send to the API
       const loginData = {
         username: this.username,
-        password: this.pass
+        password: this.password
       };
 
-      // Send the login request to the backend API
-      this.http.post<any>(`${environment.apiUrl}/login`, loginData).subscribe(
+      this.http.post<any>(this.apiUrl, loginData).subscribe(
         (response) => {
           if (response && response.token) {
-            // Store the token in cookies
-            const expiresIn = 2;  // Set cookie expiration (in days)
+            const expiresIn = 2; // Set cookie expiration (in days)
             this.cookieService.set('authToken', response.token, expiresIn);
-
-            // Store the user's username (optional, but useful for display purposes)
             this.cookieService.set('username', this.username, expiresIn);
-
-            // Redirect to the profile page
             this.router.navigate(['/profile']);
           } else {
             alert('Invalid login credentials.');
           }
         },
         (error) => {
-          // Handle error case (e.g., incorrect credentials)
           alert('Login failed. Please check your credentials and try again.');
         }
       );
