@@ -4,11 +4,10 @@ import { LoginComponent } from '../login/login.component';
 import { CookieService } from 'ngx-cookie-service'; // Correctly import CookieService
 
 @Component({
-  selector: 'app-home',
-  standalone: true,
-  imports: [LoginComponent],
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'] // Fixed typo: `styleUrl` should be `styleUrls`
+    selector: 'app-home',
+    imports: [LoginComponent],
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.css'] // Fixed typo: `styleUrl` should be `styleUrls`
 })
 export class HomeComponent {
   constructor(private router: Router, private cookieService: CookieService) { } // Inject CookieService here

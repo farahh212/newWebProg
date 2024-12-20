@@ -1,38 +1,62 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormsModule } from '@angular/forms'; // Import FormsModule for ngModel
-import { RouterModule } from '@angular/router'; // Import RouterModule for routing
-import { CookieService} from 'ngx-cookie-service';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+import { HttpClient } from '@angular/common/http';  // Import HttpClient
+//import { environment } from 'src/environments/environment';  // Import environment configuration for API URL
+
 @Component({
   selector: 'app-login',
-  standalone: true,
   imports: [FormsModule, RouterModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
+
 })
 export class LoginComponent {
-  email: string = '';
+  username: string = '';
   pass: string = '';
+  apiUrl: string = 'http://127.0.0.1:8000/api/login'; // Replace with your actual backend URL
 
-  constructor(private router: Router, private cookieService: CookieService) { }
+
+  constructor(
+    private router: Router,
+    private cookieService: CookieService,
+    private http: HttpClient  // Inject HttpClient
+  ) {}
 
   onLoginClick() {
-    // Validate the login details (in this case, we'll assume it's always valid)
-    if (this.email && this.pass) {
-      // Store the user details in cookies (you can store more information based on requirements)
-      // Set cookies with an expiration of 2 days
-      const expiresIn = 2;  // in days
-      this.cookieService.set('userEmail', this.email, expiresIn);
-      this.cookieService.set('isLoggedIn', 'true', expiresIn); // Set a cookie to track if the user is logged in
+    if (this.username && this.pass) {
+      // Prepare login data to send to the API
+      const loginData = {
+        username: this.username,
+        password: this.pass
+      };
 
-      // Show a login success message
-      alert('You are logged in!');
+      // Send the login request to the backend API
+      this.http.post<any>(`${environment.apiUrl}/login`, loginData).subscribe(
+        (response) => {
+          if (response && response.token) {
+            // Store the token in cookies
+            const expiresIn = 2;  // Set cookie expiration (in days)
+            this.cookieService.set('authToken', response.token, expiresIn);
 
-      // Redirect to the profile page
-      this.router.navigate(['/profile']);
+            // Store the user's username (optional, but useful for display purposes)
+            this.cookieService.set('username', this.username, expiresIn);
+
+            // Redirect to the profile page
+            this.router.navigate(['/profile']);
+          } else {
+            alert('Invalid login credentials.');
+          }
+        },
+        (error) => {
+          // Handle error case (e.g., incorrect credentials)
+          alert('Login failed. Please check your credentials and try again.');
+        }
+      );
     } else {
-      // Handle the case when email or password is empty
-      alert('Please enter both email and password.');
+      alert('Please enter both username and password.');
     }
   }
 }

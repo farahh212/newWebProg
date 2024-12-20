@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
-import { HttpInterceptorService } from './http.interceptor';
+import { AuthInterceptor } from './http.interceptor'; // Ensure this path is correct
 
 @NgModule({
   declarations: [
@@ -10,12 +10,12 @@ import { HttpInterceptorService } from './http.interceptor';
   ],
   imports: [
     BrowserModule,
-    HttpClientModule,  // Import HttpClientModule
+    HttpClientModule,
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: HttpInterceptorService,
+      useClass: AuthInterceptor, // Use the AuthInterceptor here
       multi: true,
     },
   ],

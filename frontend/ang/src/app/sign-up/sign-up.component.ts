@@ -1,45 +1,59 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';  // Import CommonModule for ngIf
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.css'],
   standalone: true,
-  imports: [FormsModule, RouterModule, CommonModule]
+  imports: [FormsModule, RouterModule, CommonModule, HttpClientModule]
 })
 export class SignUpComponent implements OnInit {
-  name: string = '';
+  username: string = '';
   email: string = '';
   password: string = '';
   confirmPassword: string = '';
+  apiUrl: string = 'http://127.0.0.1:8000/api/users/post'; // Replace with your actual backend URL
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private http: HttpClient) { }
 
   ngOnInit(): void {
-    // Clear form fields when the page loads
     this.resetForm();
   }
 
   resetForm(): void {
-    this.name = '';
+    this.username = '';
     this.email = '';
     this.password = '';
     this.confirmPassword = '';
   }
 
-  onSubmit() {
+  onSubmit(): void {
     if (this.isValidForm()) {
-      console.log('User signed up with:', this.name, this.email, this.password);
-      // Redirect to login page after sign-up
-      this.router.navigate(['/login'], { queryParams: { name: this.name, email: this.email, password: this.password } });
-      // Optionally reset the form after successful submission
-      this.resetForm();
+      const userData = {
+        username: this.username,
+        email: this.email,
+        password: this.password
+      };
+
+      this.http.post(this.apiUrl, userData).subscribe({
+        next: (response) => {
+          console.log('User signed up successfully:', response);
+          this.router.navigate(['/login'], {
+            queryParams: { username: this.username, email: this.email }
+          });
+          this.resetForm();
+        },
+        error: (error) => {
+          console.error('Error during signup:', error);
+          window.alert('Failed to sign up. Please try again.');
+        }
+      });
     } else {
-      // Show error messages as alerts
       this.showErrorAlert();
     }
   }
@@ -55,8 +69,11 @@ export class SignUpComponent implements OnInit {
       valid = false;
     }
 
-    // Ensure all fields are filled
-    if (!this.name || !this.email || !this.password || !this.confirmPassword) {
+    if (!this.username || !this.email || !this.password || !this.confirmPassword) {
+      valid = false;
+    }
+
+    if (!this.isValidEmail(this.email)) {
       valid = false;
     }
 
@@ -68,11 +85,10 @@ export class SignUpComponent implements OnInit {
     return emailRegex.test(email);
   }
 
-  showErrorAlert() {
+  showErrorAlert(): void {
     let alertMessage = '';
 
-    // Collect error messages
-    if (!this.name || !this.email || !this.password || !this.confirmPassword) {
+    if (!this.username || !this.email || !this.password || !this.confirmPassword) {
       alertMessage += 'All fields are required.\n';
     }
 
@@ -84,9 +100,12 @@ export class SignUpComponent implements OnInit {
       alertMessage += 'Passwords do not match.\n';
     }
 
-    // Show the alert with error messages
+    if (!this.isValidEmail(this.email)) {
+      alertMessage += 'Invalid email format.\n';
+    }
+
     if (alertMessage) {
-      window.alert(alertMessage);  // Displays the error messages in a pop-up alert
+      window.alert(alertMessage);
     }
   }
 }

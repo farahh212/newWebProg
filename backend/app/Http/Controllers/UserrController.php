@@ -25,18 +25,18 @@ class UserrController extends Controller
      */
     public function store(Request $request)
     {
-        //user name, password, user data, score and credit card
-        $validatedData=$request->validate([
-            'username'=>'required',
-            'password'=>'required',
-            'userdata'=>'required',
-            'score'=>'numeric',
-            'creditcard'=>'numeric'
+        $validatedData = $request->validate([
+            'username' => 'required|string',
+            'email' => 'required|email',
+            'password' => 'required|string',
+            'creditcard' => 'nullable|string', // Ensure this is nullable if optional
         ]);
-        $user=Userr::create($validatedData);
-        return response()->json($product,201);
+    
+        $user = Userr::create($validatedData);
+        return response()->json($user, 201);
     }
-
+    
+    
     /**
      * Display the specified resource.
      */

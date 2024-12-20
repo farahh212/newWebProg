@@ -8,5 +8,5 @@ class Userr extends Model
 {
     //
     protected $table='_userr_table_';
-    protected $fillable= [ 'username', 'password', 'userdata', 'score', 'creditcard'];
+    protected $fillable= [ 'username', 'password', 'email', 'creditcard'];
 }

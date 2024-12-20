@@ -5,11 +5,10 @@ import { CommonModule } from '@angular/common';  // Import CommonModule for ngIf
 import { CookieService } from 'ngx-cookie-service';  // Import CookieService
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css'],
-  standalone: true,
-  imports: [FormsModule, CommonModule]  // Ensure FormsModule is in imports
+    selector: 'app-profile',
+    templateUrl: './profile.component.html',
+    styleUrls: ['./profile.component.css'],
+    imports: [FormsModule, CommonModule] // Ensure FormsModule is in imports
 })
 export class ProfileComponent implements OnInit {
   name: string = '';
